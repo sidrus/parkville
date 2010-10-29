@@ -32,7 +32,12 @@ include Makefile
 OBJECTDIR=build/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
-OBJECTFILES=
+OBJECTFILES= \
+	${OBJECTDIR}/src/io/iostream.o \
+	${OBJECTDIR}/src/io/keyboard.o \
+	${OBJECTDIR}/src/kernel/kernel.o \
+	${OBJECTDIR}/src/io/display.o \
+	${OBJECTDIR}/src/boot/boot-stage2.o
 
 
 # C Compiler Flags
@@ -60,6 +65,30 @@ dist/Release/GNU-Linux-x86/libparkville.a: ${OBJECTFILES}
 	${RM} dist/Release/GNU-Linux-x86/libparkville.a
 	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libparkville.a ${OBJECTFILES} 
 	$(RANLIB) dist/Release/GNU-Linux-x86/libparkville.a
+
+${OBJECTDIR}/src/io/iostream.o: src/io/iostream.c 
+	${MKDIR} -p ${OBJECTDIR}/src/io
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/io/iostream.o src/io/iostream.c
+
+${OBJECTDIR}/src/io/keyboard.o: src/io/keyboard.c 
+	${MKDIR} -p ${OBJECTDIR}/src/io
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/io/keyboard.o src/io/keyboard.c
+
+${OBJECTDIR}/src/kernel/kernel.o: src/kernel/kernel.c 
+	${MKDIR} -p ${OBJECTDIR}/src/kernel
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/kernel/kernel.o src/kernel/kernel.c
+
+${OBJECTDIR}/src/io/display.o: src/io/display.c 
+	${MKDIR} -p ${OBJECTDIR}/src/io
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/io/display.o src/io/display.c
+
+${OBJECTDIR}/src/boot/boot-stage2.o: src/boot/boot-stage2.s 
+	${MKDIR} -p ${OBJECTDIR}/src/boot
+	$(AS) $(ASFLAGS) -o ${OBJECTDIR}/src/boot/boot-stage2.o src/boot/boot-stage2.s
 
 # Subprojects
 .build-subprojects:

@@ -5,6 +5,9 @@
                    displayName="Header Files"
                    projectFiles="true"
                    kind="SOURCE_LOGICAL_FOLDER">
+      <itemPath>src/inc/core.h</itemPath>
+      <itemPath>src/inc/display.h</itemPath>
+      <itemPath>src/inc/iostream.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -15,6 +18,11 @@
                    displayName="Source Files"
                    projectFiles="true"
                    kind="SOURCE_LOGICAL_FOLDER">
+      <itemPath>src/boot/boot-stage2.s</itemPath>
+      <itemPath>src/io/display.c</itemPath>
+      <itemPath>src/io/iostream.c</itemPath>
+      <itemPath>src/kernel/kernel.c</itemPath>
+      <itemPath>src/io/keyboard.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -37,6 +45,11 @@
         <platform>2</platform>
       </toolsSet>
       <compileType>
+        <cTool>
+          <incDir>
+            <pElem>src/inc</pElem>
+          </incDir>
+        </cTool>
         <archiverTool>
         </archiverTool>
       </compileType>
