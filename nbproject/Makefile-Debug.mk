@@ -34,7 +34,6 @@ OBJECTDIR=build/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/io/iostream.o \
-	${OBJECTDIR}/src/boot/boot-stage1.o \
 	${OBJECTDIR}/src/kernel/kernel.o \
 	${OBJECTDIR}/src/io/display.o \
 	${OBJECTDIR}/src/boot/boot-stage2.o
@@ -70,10 +69,6 @@ ${OBJECTDIR}/src/io/iostream.o: src/io/iostream.c
 	${MKDIR} -p ${OBJECTDIR}/src/io
 	${RM} $@.d
 	$(COMPILE.c) -g -Isrc/inc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/io/iostream.o src/io/iostream.c
-
-${OBJECTDIR}/src/boot/boot-stage1.o: src/boot/boot-stage1.s 
-	${MKDIR} -p ${OBJECTDIR}/src/boot
-	$(AS) $(ASFLAGS) -g -o ${OBJECTDIR}/src/boot/boot-stage1.o src/boot/boot-stage1.s
 
 ${OBJECTDIR}/src/kernel/kernel.o: src/kernel/kernel.c 
 	${MKDIR} -p ${OBJECTDIR}/src/kernel
