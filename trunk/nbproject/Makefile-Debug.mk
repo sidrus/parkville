@@ -18,7 +18,7 @@ CC=gcc
 CCC=
 CXX=
 FC=
-AS=as
+AS=nasm
 
 # Macros
 CND_PLATFORM=GNU-Linux-x86
@@ -41,7 +41,7 @@ OBJECTFILES= \
 
 
 # C Compiler Flags
-CFLAGS=
+CFLAGS=-m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector
 
 # CC Compiler Flags
 CCFLAGS=
@@ -51,7 +51,7 @@ CXXFLAGS=
 FFLAGS=
 
 # Assembler Flags
-ASFLAGS=
+ASFLAGS=-f elf
 
 # Link Libraries and Options
 LDLIBSOPTIONS=
