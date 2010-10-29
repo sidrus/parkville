@@ -5,16 +5,16 @@
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
             <name>parkville</name>
             <make-project-type>0</make-project-type>
-            <c-extensions/>
+            <c-extensions>c</c-extensions>
             <cpp-extensions/>
-            <header-extensions/>
+            <header-extensions>h</header-extensions>
+            <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList/>
             <confList>
                 <confElem>Debug</confElem>
                 <confElem>Release</confElem>
             </confList>
-            <sourceEncoding>UTF-8</sourceEncoding>
         </data>
     </configuration>
 </project>
