@@ -29,51 +29,51 @@ void monitor_put(char c) {
 	u8int colorByte = DEFAULT_COLOR;
 	u16int attribute = colorByte << 8;
 	u16int *location;
-	
+
 	// handle a backspace
 	if(c==BACKSPACE && cursorX) {
 		cursorX--;
 	}
-	
+
 	// handle tabs
 	else if(c == TAB) {
 		cursorX = (cursorX + 8) & ~(8 - 1);
 	}
-	
+
 	// handle carriage return
 	else if(c == RETURN) {
 		cursorX = 0;
 	}
-	
+
 	// handle new line
 	else if(c == LINEFEED) {
 		cursorX = 0;
 		cursorY++;
 	}
-	
+
 	else if(c >= ' ') {
 		location = video_memory + (cursorY * 80 + cursorX);
 		*location = c | attribute;
 		cursorX++;
 	}
-	
+
 	if(cursorX >= 80) {
 		cursorX = 0;
 		cursorY++;
 	}
-	
+
 	scroll();
 	move_cursor();
 }
 
 void monitor_clear() {
 	u16int blank = get_blank_character();
-	
+
 	int i;
 	for(i=0; i<80*25; i++) {
 		video_memory[i] = blank;
 	}
-	
+
 	reset_cursor();
 }
 
