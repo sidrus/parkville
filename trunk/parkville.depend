@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1288436055 source:/home/brandon/development/parkville/src/display.c
+	"display.h"
+
+1288435148 /home/brandon/development/parkville/src/display.h
+	"core.h"
+
+1288435148 /home/brandon/development/parkville/src/core.h
+
+1288435420 source:/home/brandon/development/parkville/src/iostream.c
+	"iostream.h"
+
+1288435148 /home/brandon/development/parkville/src/iostream.h
+	"core.h"
+
+1288435802 source:/home/brandon/development/parkville/src/kernel.c
+	"display.h"
+

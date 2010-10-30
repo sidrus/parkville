@@ -14,22 +14,22 @@ MBOOT_CHECKSUM      equ -(MBOOT_HEADER_MAGIC + MBOOT_HEADER_FLAGS)
 [EXTERN code]
 [EXTERN bss]
 [EXTERN end]
-[EXTERN main]
+[EXTERN kmain]
 
 mboot:
-  dd  MBOOT_HEADER_MAGIC
-  dd  MBOOT_HEADER_FLAGS
-  dd  MBOOT_CHECKSUM
+dd  MBOOT_HEADER_MAGIC
+dd  MBOOT_HEADER_FLAGS
+dd  MBOOT_CHECKSUM
 
-  dd  mboot
-  dd  code
-  dd  bss
-  dd  end
-  dd  start
+dd  mboot
+dd  code
+dd  bss
+dd  end
+dd  start
 
 start:
-  push    ebx
+push    ebx
 
-  cli
-  call main
-  jmp $
+cli
+call kmain
+jmp $

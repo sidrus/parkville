@@ -21,116 +21,78 @@ const u8int LINEFEED  = 0x0A;
 const u8int RETURN    = 0x0D;
 
 // Public Functions
-void monitor_init() {
-	BLANK_CHARACTER = DEFAULT_COLOR | 0x21;
+void monitor_init()
+{
+    //BLANK_CHARACTER = DEFAULT_COLOR | 0x21;
+    BLANK_CHARACTER = get_blank_character();
 }
 
-void monitor_put(char c) {
-	u8int colorByte = DEFAULT_COLOR;
-	u16int attribute = colorByte << 8;
-	u16int *location;
+void monitor_put(char c)
+{
+    u8int colorByte = DEFAULT_COLOR;
+    u16int attribute = colorByte << 8;
+    u16int *location;
 
-	// handle a backspace
-	if(c==BACKSPACE && cursorX) {
-		cursorX--;
-	}
+    // handle a backspace
+    if(c==BACKSPACE && cursorX)
+    {
+        cursorX--;
+    }
 
-	// handle tabs
-	else if(c == TAB) {
-		cursorX = (cursorX + 8) & ~(8 - 1);
-	}
+    // handle tabs
+    else if(c == TAB)
+    {
+        cursorX = (cursorX + 8) & ~(8 - 1);
+    }
 
-	// handle carriage return
-	else if(c == RETURN) {
-		cursorX = 0;
-	}
+    // handle carriage return
+    else if(c == RETURN)
+    {
+        cursorX = 0;
+    }
 
-	// handle new line
-	else if(c == LINEFEED) {
-		cursorX = 0;
-		cursorY++;
-	}
+    // handle new line
+    else if(c == LINEFEED)
+    {
+        cursorX = 0;
+        cursorY++;
+    }
 
-	else if(c >= ' ') {
-		location = video_memory + (cursorY * 80 + cursorX);
-		*location = c | attribute;
-		cursorX++;
-	}
+    else if(c >= ' ')
+    {
+        location = video_memory + (cursorY * 80 + cursorX);
+        *location = c | attribute;
+        cursorX++;
+    }
 
-	if(cursorX >= 80) {
-		cursorX = 0;
-		cursorY++;
-	}
+    if(cursorX >= 80)
+    {
+        cursorX = 0;
+        cursorY++;
+    }
 
-	scroll();
-	move_cursor();
+    scroll();
+    move_cursor();
 }
 
-void monitor_clear() {
-	u16int blank = get_blank_character();
+void monitor_clear()
+{
+    u16int blank = get_blank_character();
 
-	int i;
-	for(i=0; i<80*25; i++) {
-		video_memory[i] = blank;
-	}
+    int i;
+    for(i=0; i<80*25; i++)
+    {
+        video_memory[i] = blank;
+    }
 
-	reset_cursor();
+    reset_cursor();
 }
 
-void monitor_write(char *c) {
-	int i = 0;
-	while(c[i]) {
-		monitor_put(c[i++]);
-	}
-}
-
-// Returns the cursor to the 0,0 position
-void reset_cursor() {
-	cursorX = 0;
-	cursorY = 0;
-	move_cursor();
-}
-
-// Private Functions
-static void move_cursor() {
-	u16int cursorLocation = cursorY * 80 + cursorX;
-
-	// Send the high cursor byte
-	writeByte(VGA_PORT, 14);
-	writeByte(VGA_PORT, cursorLocation >> 8);
-
-	// Send the low cursor byte
-	writeByte(VGA_PORT, 15);
-	writeByte(VGA_PORT, cursorLocation);
-}
-
-/*
- * Scroll the display screen up by 1 row.  This function shifts all the values
- * in the memory buffer up by 1 row, then draws a blank line on the bottom of
- * the screen.
- */
-static void scroll() {
-	u16int blank = get_blank_character();
-
-	// Row 25 is the end, so we need to scroll up
-	if(cursorY >= 25) {
-		// move the current text chunk
-		int i;
-		for(i=0; i < 24 * 80; i++) {
-			video_memory[i] = video_memory[i + 80];
-		}
-
-		// the last line should be blank, so write spaces to clear it.
-		for( i=24 * 80; i < 25 * 80; i++) {
-			video_memory[i] = BLANK_CHARACTER;
-		}
-
-		cursorY = 24;
-	}
-}
-
-// Creates a word representing the blank character.
-static u16int get_blank_character() {
-	u8int colorByte = DEFAULT_COLOR;
-	return (0x20 | (colorByte << 8));
+void monitor_write(char *c)
+{
+    int i = 0;
+    while(c[i])
+    {
+        monitor_put(c[i++]);
+    }
 }
