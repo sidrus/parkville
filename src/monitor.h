@@ -1,7 +1,7 @@
+#include "core.h"
+
 #ifndef MONITOR_H
 #define MONITOR_H
-
-#include "core.h"
 
 // API calls
 void monitor_init();

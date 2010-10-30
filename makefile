@@ -1,21 +1,26 @@
-# Makefile for JamesM's kernel tutorials.
-# The C and C++ rules are already setup by default.
-# The only one that needs changing is the assembler
-# rule, as we use nasm instead of GNU as.
+# Makefile based on JamesM's kernel tutorials.
 
-SOURCES=src/boot-stage-2.o src/kernel.o src/core.o src/monitor.o
+SRCDIR = src
 
-CFLAGS=-m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector
-LDFLAGS=-T link.ld -m elf_i386
-ASFLAGS=-f elf
+SOURCES = $(SRCDIR)/boot-stage2.o \
+          $(SRCDIR)/kernel.o \
+          $(SRCDIR)/monitor.o
 
-all: $(SOURCES) link 
+CFLAGS  = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector
+LDFLAGS = -T link.ld -m elf_i386
+ASFLAGS = -f elf
 
-clean:
-	-rm src/*.o bin/kernel
+# Main build recipe
+all: $(SOURCES) link
 
 link:
 	ld $(LDFLAGS) -o bin/kernel $(SOURCES)
 
+# Recipe for assembly files
 .s.o:
 	nasm $(ASFLAGS) $<
+
+# Clean the build
+.PHONY: clean
+clean:
+	-rm src/*.o bin/kernel
