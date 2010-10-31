@@ -1,7 +1,5 @@
-// main.c -- Defines the C-code kernel entry point, calls initialisation routines.
-// Made for JamesM's tutorials
-
 #include "core.h"
+#include "monitor.h"
 
 int kmain(struct multiboot *mboot_ptr)
 {
