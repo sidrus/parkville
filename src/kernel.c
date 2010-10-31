@@ -2,7 +2,6 @@
 // Made for JamesM's tutorials
 
 #include "core.h"
-#include "monitor.h"
 
 int kmain(struct multiboot *mboot_ptr)
 {
