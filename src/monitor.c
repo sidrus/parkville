@@ -84,6 +84,11 @@ void monitor_write(char *c) {
 	}
 }
 
+void monitor_writeln(char *c) {
+    monitor_write(c);
+    monitor_write("\n\r");
+}
+
 // Returns the cursor to the 0,0 position
 void reset_cursor() {
 	cursorX = 0;
