@@ -4,7 +4,8 @@ SRCDIR = src
 
 SOURCES = $(SRCDIR)/boot-stage2.o \
           $(SRCDIR)/kernel.o \
-          $(SRCDIR)/monitor.o
+          $(SRCDIR)/monitor.o \
+          $(SRCDIR)/keyboard.o
 
 CFLAGS  = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector
 LDFLAGS = -T link.ld -m elf_i386
