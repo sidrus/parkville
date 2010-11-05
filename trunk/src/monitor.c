@@ -23,7 +23,7 @@ const u8int RETURN    = 0x0D;
 // Public Functions
 void monitor_init() {
 	BLANK_CHARACTER = DEFAULT_COLOR | 0x21;
-}
+};
 
 void monitor_put(char c) {
 	u8int colorByte = DEFAULT_COLOR;
@@ -64,7 +64,7 @@ void monitor_put(char c) {
 
 	scroll();
 	move_cursor();
-}
+};
 
 void monitor_clear() {
 	u16int blank = get_blank_character();
@@ -75,26 +75,27 @@ void monitor_clear() {
 	}
 
 	reset_cursor();
-}
+};
 
 void monitor_write(char *c) {
 	int i = 0;
 	while(c[i]) {
 		monitor_put(c[i++]);
 	}
-}
+};
 
 void monitor_writeln(char *c) {
     monitor_write(c);
-    monitor_write("\n\r");
-}
+    monitor_put(LINEFEED);
+    monitor_put(RETURN);
+};
 
 // Returns the cursor to the 0,0 position
 void reset_cursor() {
 	cursorX = 0;
 	cursorY = 0;
 	move_cursor();
-}
+};
 
 // Private Functions
 static void move_cursor() {
@@ -107,7 +108,7 @@ static void move_cursor() {
 	// Send the low cursor byte
 	writeByte(VGA_PORT, 15);
 	writeByte(VGA_PORT, cursorLocation);
-}
+};
 
 /*
  * Scroll the display screen up by 1 row.  This function shifts all the values
@@ -132,12 +133,12 @@ static void scroll() {
 
 		cursorY = 24;
 	}
-}
+};
 
 // Creates a word representing the blank character.
 static u16int get_blank_character() {
 	u8int colorByte = DEFAULT_COLOR;
 	return (0x20 | (colorByte << 8));
-}
+};
 
 
