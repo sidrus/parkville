@@ -15,13 +15,13 @@ ASFLAGS = -f elf
 all: $(SOURCES) link
 
 link:
-	ld $(LDFLAGS) -o bin/kernel $(SOURCES)
+	@ld $(LDFLAGS) -o bin/kernel $(SOURCES)
 
 # Recipe for assembly files
 .s.o:
-	nasm $(ASFLAGS) $<
+	@nasm $(ASFLAGS) $<
 
 # Clean the build
 .PHONY: clean
 clean:
-	-rm src/*.o bin/kernel
+	@rm -rf src/*.o bin/kernel
