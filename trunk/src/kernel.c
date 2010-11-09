@@ -30,11 +30,10 @@ void printMultibootInfo(multiboot_info_t* info) {
 };
 
 // Main kernel entry point
-int kmain(multiboot_info_t* mboot_ptr, u32int magic)
-{
+int kmain(multiboot_info_t* mboot_ptr, u32int magic) {
 	monitor_init();
 	printWelcome();
-	printMultibootInfo(mboot_ptr);
+	//printMultibootInfo(mboot_ptr);
 
 	return 0xDEADBABA;
 };
